@@ -22,13 +22,21 @@ class Cat {
     }
   }
 
+  markov.says.myBind(pavlov)("meow", "a tree");
 
-  Function.prototype.myBind = function (name,...args) {
-    that = this; 
-    return function () {
-        return that.call(name, ...args);
-    };
-};
+  markov.says.myBind(pavlov, "meow")("Markov");
+
+
+//   Function.prototype.myBind = function (context, ...bindTimeArguments) {
+//     that = this;
+
+//     // const myArgs = [...arguments];
+//     // console.log(myArgs);
+//     return function ( ...callTimeArguments) {
+      
+//         return that.apply(context, bindTimeArguments.concat(callTimeArguments)) 
+//     };
+// };
 
 
 
@@ -36,7 +44,7 @@ class Cat {
   const markov = new Cat("Markov");
   const pavlov = new Dog("Pavlov");
   
-  markov.says("meow", "Ned");
+  // markov.says("meow", "Ned");
   // Markov says meow to Ned!
   // true
   
@@ -45,7 +53,9 @@ class Cat {
 //   // Pavlov says meow to Kush!
 //   // true
 
+
 // Function.prototype.myBind = function (name,...args) {
+
 //     that = this; 
 //     return function () {
 //         return that.call(name, ...args);
@@ -59,7 +69,7 @@ class Cat {
 //   // true
   
 //   // bind time arg is "meow", call time arg is "Markov"
-//   markov.says.myBind(pavlov, "meow")("Markov");
+  markov.says.myBind(pavlov, "meow")("Markov");
 //   // Pavlov says meow to Markov!
 //   // true
   
