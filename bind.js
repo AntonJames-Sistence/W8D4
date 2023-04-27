@@ -46,7 +46,7 @@ class Cat {
   // true
   
 //   // bind time args are "meow" and "Kush", no call time args
-  markov.says.myBind(pavlov, "meow", "Kush")();
+  // markov.says.myBind(pavlov, "meow", "Kush")();
 //   // Pavlov says meow to Kush!
 //   // true
 
@@ -61,7 +61,7 @@ class Cat {
 
   
 //   // no bind time args (other than context), call time args are "meow" and "a tree"
-  markov.says.myBind(pavlov)("meow", "a tree");
+  // markov.says.myBind(pavlov)("meow", "a tree");
 //   // Pavlov says meow to a tree!
 //   // true
   
@@ -83,12 +83,37 @@ class Cat {
 //         return that.apply(context, callTimeArguments) 
 //     };
 // };
+// Function.prototype.myBind = function (context) {
+//     that = this;
+//     bindTimeArguments = [...arguments]
+//     const sliced = bindTimeArguments.slice(-1);
+//     // console.log(myArgs);
+//     return function () {
+//         callTimeArguments = [...arguments]
+//         // bindTimeArguments.slice
+//         return that.apply(context, sliced.concat(callTimeArguments)) 
+//     };
+// };
 
 //   // bind time arg is "meow", call time arg is "Markov"
-  markov.says.myBind(pavlov, "meow")("Markov");
+  // markov.says.myBind(pavlov, "meow")("Markov");
 //   // Pavlov says meow to Markov!
 //   // true
   
+
+Function.prototype.myBind = function (context) {
+  that = this;
+  // bindTimeArguments = [...arguments]
+  // const sliced = bindTimeArguments.slice(-1);
+  // console.log(myArgs);
+  return function () {
+      callTimeArguments = [...arguments]
+      // bindTimeArguments.slice
+      return that.apply(context, callTimeArguments) 
+  };
+};
+
+
 //   // no bind time args (other than context), call time args are "meow" and "me"
   const notMarkovSays = markov.says.myBind(pavlov);
   notMarkovSays("meow", "me");
